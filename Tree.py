@@ -8,7 +8,6 @@ class Node:
     def __init__(self, id, parent):
         self.id = id
         self.children = list()
-        self.income = 0
         self.parent = parent
 
     def print(self, indent, last):
@@ -58,7 +57,6 @@ def findNodeByIdRecursive(id, node):
             if result != None:
                 return result
 
-
 def findNodeById(id):
     return findNodeByIdRecursive(id, root)
 
@@ -68,13 +66,25 @@ def createRoot():
 def printFromRoot():
     root.print("", True)
 
+def getIncomeById(id):
+    node = findNodeById(id)
+    current = node
+    heightCount = 0.
+    while (current.parent != None):
+        heightCount += 1.
+        current = current.parent
+    return 0.05 * pow(0.5, heightCount)
+
+
+
 # Driver program to test above function
 root = createRoot()
 insertChildToNode(root)
 insertChildToNode(root)
 insertChildToNode(root)
+insertChildToNode(findNodeById(3))
 printFromRoot()
 node3 = findNodeById(3)
-print(node3.parent.id)
+print(getIncomeById(5))
 
 # This code is contributed by Nikhil Kumar Singh(nickzuck_007)
