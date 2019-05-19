@@ -24,14 +24,6 @@ class Node:
             self.children[i].print(indent, i == len(self.children)-1)
 
 
-# Function to print reverse level order traversal
-def reverseLevelOrder(node):
-    for child in node.children:
-        reverseLevelOrder(child)
-    print(node.data)
-    # Print nodes at a given level
-
-
 def makeChildren(node):
     for child in node.children:
         makeChildren(child)
@@ -57,9 +49,32 @@ def passStage(num):
     for x in range(0,num):
         makeChildren(root)
 
+def findNodeByIdRecursive(id, node):
+    if id == node.id:
+        return node
+    else:
+        for child in node.children:
+            result = findNodeByIdRecursive(id, child)
+            if result != None:
+                return result
+
+
+def findNodeById(id):
+    return findNodeByIdRecursive(id, root)
+
+def createRoot():
+    return Node(1, None)
+
+def printFromRoot():
+    root.print("", True)
+
 # Driver program to test above function
-root = Node(1, None)
-passStage(9)
-root.print("", True)
+root = createRoot()
+insertChildToNode(root)
+insertChildToNode(root)
+insertChildToNode(root)
+printFromRoot()
+node3 = findNodeById(3)
+print(node3.parent.id)
 
 # This code is contributed by Nikhil Kumar Singh(nickzuck_007)
